@@ -16,7 +16,7 @@ cd share-app
 **4.** Add a reference(remote) to the original repository.
 
 ```
-git remote add upstream https://github.com/Aditi-Singh16/share-app.git 
+git remote add upstream https://github.com/Aditi-Singh16/share-app.git
 ```
 
 **5.** Check the remotes for this repository.
@@ -45,7 +45,7 @@ git checkout -b <your_branch_name>
 **9.** Track your changes:heavy_check_mark: .
 
 ```
-git add . 
+git add .
 ```
 
 **10.** Commit your changes .
@@ -63,3 +63,5 @@ git push -u origin <your_branch_name>
 <br>
 <hr>
 <b> And You are done just click on the compare pull request button and merge it.</b>
+
+
