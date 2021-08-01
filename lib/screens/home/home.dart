@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:share_app/screens/receiver.dart';
-import 'package:share_app/screens/sender.dart';
+import 'package:share_app/screens/home/receiver.dart';
+import 'package:share_app/screens/home/sender.dart';
 
 class Home extends StatelessWidget {
   @override
