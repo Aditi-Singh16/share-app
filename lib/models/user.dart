@@ -1,5 +1,5 @@
 class MyUser{
-  final int? id;
+  final String id;
   final String userName;
   final String? profilePic;
 
@@ -7,7 +7,7 @@ class MyUser{
   MyUser({
     required this.userName,
     this.profilePic,
-    this.id,
+    required this.id,
   });
 
   Map<String,dynamic> toMap() {
