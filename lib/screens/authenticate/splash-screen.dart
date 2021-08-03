@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:share_app/screens/home/home.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_app/screens/authenticate/get-started.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -15,7 +15,7 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState(){
     Future.delayed(Duration(seconds:5),(){
       Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context)=>Home()));
+          builder: (context)=>GetStarted()));
     });
     super.initState();
   }
