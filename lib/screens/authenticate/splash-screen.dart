@@ -24,6 +24,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
+        color: Color.fromRGBO(104, 199, 228 , 1) ,
         alignment: Alignment.center,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -32,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
             SizedBox(
               width: 300,
               height: 300,
-              child: Lottie.asset('assets/splash.json'),
+              child: Lottie.asset('assets/splash1.json',repeat: false),
             )
           ],
         ),

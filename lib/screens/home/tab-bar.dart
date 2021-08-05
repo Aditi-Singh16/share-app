@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:share_app/screens/home/get-files.dart';
 import 'package:share_app/screens/home/get-photos.dart';
 
 import '../../make-responsive.dart';
@@ -32,7 +33,10 @@ class TabBarDemo extends StatelessWidget {
                       padding: const EdgeInsets.all(16.0),
                       child: GetPhotos(),
                     ),
-                    Icon(Icons.folder),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child:  GetFiles(),
+                      ),
                     Icon(Icons.music_note),
                   ],
                 ),
