@@ -51,11 +51,12 @@ class TabBarDemo extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     child: Image.asset(
-                      'assets/sendButton.png',
+                      'assets/sendButton.jpg',
                       height: SizeConfig.blockSizeVertical!*15,
                       width: SizeConfig.blockSizeHorizontal!*30,
                     ),
                     style: ElevatedButton.styleFrom(
+                      elevation: 0.1,
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(0.0),
                       primary: Color(0xff64DFDF), // <-- Button color
@@ -66,11 +67,12 @@ class TabBarDemo extends StatelessWidget {
                   ElevatedButton(
                     onPressed: () {},
                     child: Image.asset(
-                      'assets/receiveButton.png',
+                      'assets/receiveButton.jpg',
                       height: SizeConfig.blockSizeVertical!*15,
                       width: SizeConfig.blockSizeHorizontal!*30,
                     ),
                     style: ElevatedButton.styleFrom(
+                      elevation: 0.1,
                       shape: CircleBorder(),
                       padding: EdgeInsets.all(0.0),
                       primary: Color(0xff64DFDF), // <-- Button color
@@ -89,32 +91,3 @@ class TabBarDemo extends StatelessWidget {
   }
 }
 
-// ElevatedButton(
-// child: Image.asset(
-// 'assets/sendButton.PNG',
-// height: SizeConfig.blockSizeVertical!*15,
-// width: SizeConfig.blockSizeHorizontal!*30,
-// ),
-// onPressed: () {
-// print('send');
-// },
-// style: ElevatedButton.styleFrom(
-//
-// primary: Color(0xffCAF0F8),
-// ),
-// ),
-// // SizedBox(width: SizeConfig.blockSizeHorizontal!*10),
-// ElevatedButton(
-// child: Image.asset(
-// 'assets/receiverButton.PNG',
-// height: SizeConfig.blockSizeVertical!*15,
-// width: SizeConfig.blockSizeHorizontal!*30,
-// ),
-// style: ElevatedButton.styleFrom(
-//
-// primary: Color(0xffCAF0F8),
-// ),
-// onPressed: () {
-// print('send');
-// },
-// ),
