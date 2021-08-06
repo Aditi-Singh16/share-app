@@ -19,6 +19,7 @@ class _GetPhotosState extends State<GetPhotos> {
   int currentPage = 0;
   int? lastPage;
   AsciiCodec ac=new AsciiCodec();
+
   @override
   void initState() {
     super.initState();
@@ -35,8 +36,7 @@ class _GetPhotosState extends State<GetPhotos> {
     lastPage = currentPage;
     var result = await PhotoManager.requestPermission();
     if (result) {
-      // success
-//load the album list
+
       List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(onlyAll: true, type: RequestType.image);
       List<AssetEntity> media = await albums[0].getAssetListPaged(currentPage, 60);
       List<Widget> temp = [];
@@ -78,25 +78,40 @@ class _GetPhotosState extends State<GetPhotos> {
   }
 
   Widget build(BuildContext context) {
-
+    bool isChecked = false;
     return NotificationListener<ScrollNotification>(
       onNotification: (ScrollNotification scroll) {
         _handleScrollEvent(scroll);
         return true;
       },
-      child: GridView.custom(
-          gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 3,
-            childAspectRatio: (1 / 1),
-            crossAxisSpacing: 5,
-            mainAxisSpacing: 5,
-          ),
-          childrenDelegate: SliverChildListDelegate(
-              _mediaList.toList()
-          )
-          ),
-
-
+      child: GridView.builder(
+          itemCount: _mediaList.length,
+          gridDelegate:
+          SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+          itemBuilder: (BuildContext context, int index) {
+            return Stack(
+              children: [
+                Container(
+                  child: _mediaList[index],
+                ),
+                Align(
+                  alignment: Alignment.topRight,
+                  child: StatefulBuilder(
+                    builder: (BuildContext context, StateSetter setState) {
+                      return Checkbox(
+                            value: isChecked,
+                            shape: CircleBorder(),
+                            onChanged: (value) {
+                            setState(() {
+                            isChecked = value!;
+                          });
+                        },
+                      );
+                      }),
+                ),
+              ],
+            );
+          }),
     );
   }
 }
