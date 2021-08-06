@@ -14,6 +14,7 @@ class TabBarDemo extends StatelessWidget {
       home: DefaultTabController(
         length: 3,
         child: Scaffold(
+          backgroundColor: Color(0xffCAF0F8),
           appBar: AppBar(
             bottom:TabBar(
               tabs: [
@@ -41,17 +42,43 @@ class TabBarDemo extends StatelessWidget {
                   ],
                 ),
               ),
-              Row(
+              Padding(
+                padding: const EdgeInsets.all(20.0),
+                child: Row(
+                mainAxisAlignment: MainAxisAlignment.center ,//Center Row contents horizontally,
+                crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
                   ElevatedButton(
-                      onPressed: (){},
-                      child: Text('send')
+                    onPressed: () {},
+                    child: Image.asset(
+                      'assets/sendButton.png',
+                      height: SizeConfig.blockSizeVertical!*15,
+                      width: SizeConfig.blockSizeHorizontal!*30,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(0.0),
+                      primary: Color(0xff64DFDF), // <-- Button color
+                      onPrimary: Colors.red, // <-- Splash color
+                    ),
                   ),
+                  SizedBox(width: SizeConfig.blockSizeHorizontal!*10.0),
                   ElevatedButton(
-                      onPressed: (){},
-                      child: Text('receive')
+                    onPressed: () {},
+                    child: Image.asset(
+                      'assets/receiveButton.png',
+                      height: SizeConfig.blockSizeVertical!*15,
+                      width: SizeConfig.blockSizeHorizontal!*30,
+                    ),
+                    style: ElevatedButton.styleFrom(
+                      shape: CircleBorder(),
+                      padding: EdgeInsets.all(0.0),
+                      primary: Color(0xff64DFDF), // <-- Button color
+                      onPrimary: Colors.red, // <-- Splash color
+                    ),
                   )
-                ],
+                  ],
+                ),
               )
 
             ]
@@ -61,3 +88,33 @@ class TabBarDemo extends StatelessWidget {
     );
   }
 }
+
+// ElevatedButton(
+// child: Image.asset(
+// 'assets/sendButton.PNG',
+// height: SizeConfig.blockSizeVertical!*15,
+// width: SizeConfig.blockSizeHorizontal!*30,
+// ),
+// onPressed: () {
+// print('send');
+// },
+// style: ElevatedButton.styleFrom(
+//
+// primary: Color(0xffCAF0F8),
+// ),
+// ),
+// // SizedBox(width: SizeConfig.blockSizeHorizontal!*10),
+// ElevatedButton(
+// child: Image.asset(
+// 'assets/receiverButton.PNG',
+// height: SizeConfig.blockSizeVertical!*15,
+// width: SizeConfig.blockSizeHorizontal!*30,
+// ),
+// style: ElevatedButton.styleFrom(
+//
+// primary: Color(0xffCAF0F8),
+// ),
+// onPressed: () {
+// print('send');
+// },
+// ),

@@ -16,8 +16,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       //home:Wrapper()
-      // home: TabBarDemo(),
-      home : SplashScreen()
+      home: TabBarDemo(),
+      //home : SplashScreen()
     );
   }
 }
