@@ -48,10 +48,19 @@ class _GetFilesState extends State<GetFiles> {
               itemCount: files?.length ?? 0,
               itemBuilder: (context, index) {
                     return Card(
+                      color: Color(0xff00B4D8),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(15.0),
+                        ),
                       child:ListTile(
-                         title: Text(files[index].path.split('/').last),
-                         leading: Icon(Icons.image),
-                         trailing: Icon(Icons.delete, color: Colors.redAccent,),
+                         title: Text(
+                             files[index].path.split('/').last.toString().replaceAll(".pdf", ""),
+                              style: TextStyle(
+                                fontSize: 15.0,
+                                color: Colors.white
+                              ),
+                         ),
+                         leading: Icon(Icons.picture_as_pdf),
                       )
                     );
               },
