@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:share_app/screens/home/receiver.dart';
 import 'package:share_app/screens/home/sender.dart';
 import 'package:file_picker/file_picker.dart';
+import 'dart:io';
 
 class GetFiles extends StatefulWidget {
   const GetFiles({ Key? key }) : super(key: key);
@@ -14,13 +15,13 @@ class GetFiles extends StatefulWidget {
 class _GetFilesState extends State<GetFiles> {
   List<String> extensions = ['jpg','pdf'];
   Map<String, String> paths = {};
-  List<io.File> files = [];
+  List<File> files = [];
 
   void _openfilepicker() async {
      FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
       if(result != null) {
-        files = result.paths.map((path) => io.File(path!)).toList();
+        files = result.paths.map((path) => File(path!)).toList();
         print(files);
       } else {
         // User canceled the picker
@@ -57,5 +58,6 @@ class _GetFilesState extends State<GetFiles> {
         
 
         ],)
+    );
   }
 }
