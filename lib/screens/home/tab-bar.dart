@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:share_app/screens/home/get-files.dart';
+import 'package:share_app/screens/home/get-music.dart';
 import 'package:share_app/screens/home/get-photos.dart';
+import 'package:share_app/screens/home/get-videos.dart';
 
 import '../../make-responsive.dart';
 
@@ -12,13 +14,14 @@ class TabBarDemo extends StatelessWidget {
     SizeConfig().init(context);
     return MaterialApp(
       home: DefaultTabController(
-        length: 3,
+        length: 4,
         child: Scaffold(
           backgroundColor: Color(0xffCAF0F8),
           appBar: AppBar(
             bottom:TabBar(
               tabs: [
                 Tab(icon: Icon(Icons.image)),
+                Tab(icon: Icon(Icons.video_library_rounded)),
                 Tab(icon: Icon(Icons.folder)),
                 Tab(icon: Icon(Icons.music_note)),
               ],
@@ -36,9 +39,16 @@ class TabBarDemo extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
+                      child: GetVideos(),
+                    ),                    
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
                       child:  GetFiles(),
                       ),
-                    Icon(Icons.music_note),
+                    Padding(
+                      padding: const EdgeInsets.all(16.0),
+                      child:  GetMusic(),
+                    )
                   ],
                 ),
               ),

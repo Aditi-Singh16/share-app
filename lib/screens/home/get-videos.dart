@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'dart:convert';
 import 'dart:typed_data';
 
@@ -6,16 +7,19 @@ import 'package:photo_manager/photo_manager.dart';
 
 import '../../make-responsive.dart';
 
-class GetPhotos extends StatefulWidget {
-  const GetPhotos({Key? key}) : super(key: key);
+class GetVideos extends StatefulWidget {
+  const GetVideos({ Key? key }) : super(key: key);
 
   @override
-  _GetPhotosState createState() => _GetPhotosState();
+  _GetVideosState createState() => _GetVideosState();
 }
 
-class _GetPhotosState extends State<GetPhotos> {
+class _GetVideosState extends State<GetVideos> {
 
-  List<Widget> _mediaList = [];
+
+
+
+List<Widget> _mediaList = [];
   int currentPage = 0;
   int? lastPage;
   AsciiCodec ac=new AsciiCodec();
@@ -37,7 +41,7 @@ class _GetPhotosState extends State<GetPhotos> {
     if (result) {
       // success
 //load the album list
-      List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(onlyAll: true, type: RequestType.image);
+      List<AssetPathEntity> albums = await PhotoManager.getAssetPathList(onlyAll: true, type: RequestType.video);
       List<AssetEntity> media = await albums[0].getAssetListPaged(currentPage, 60);
       List<Widget> temp = [];
       for (var asset in media) {
@@ -53,6 +57,16 @@ class _GetPhotosState extends State<GetPhotos> {
                         snapshot.data!,
                         fit: BoxFit.cover,
                       ),
+                    ), 
+                    Align(
+                      alignment: Alignment.bottomRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(right: 5, bottom: 5),
+                        child: Icon(
+                          Icons.videocam,
+                          color: Colors.white,
+                        ),
+                      ),
                     ),
                   ],
                 );
@@ -60,6 +74,7 @@ class _GetPhotosState extends State<GetPhotos> {
             },
           ),
         );
+        
       }
       setState(() {
         _mediaList.addAll(temp);
