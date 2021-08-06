@@ -1,21 +1,16 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:share_app/screens/home/receiver.dart';
-import 'package:share_app/screens/home/sender.dart';
-import 'package:file_picker/file_picker.dart';
 import 'dart:io';
 import 'package:flutter_file_manager/flutter_file_manager.dart';
 import 'package:path_provider_ex/path_provider_ex.dart';
 
-class GetFiles extends StatefulWidget {
-  const GetFiles({ Key? key }) : super(key: key);
+class GetMusic extends StatefulWidget {
+  const GetMusic({ Key? key }) : super(key: key);
 
   @override
-  _GetFilesState createState() => _GetFilesState();
+  _GetMusicState createState() => _GetMusicState();
 }
 
-class _GetFilesState extends State<GetFiles> {
-
+class _GetMusicState extends State<GetMusic> {
   var files;
  
   void getFiles() async { //asyn function to get list of files
@@ -25,7 +20,7 @@ class _GetFilesState extends State<GetFiles> {
       files = await fm.filesTree( 
       //set fm.dirsTree() for directory/folder tree list
         excludedPaths: ["/storage/emulated/0/Android"],
-        extensions: ["pdf"] //optional, to filter files, remove to list all,
+        extensions: ["mp3","wma","aac"] //optional, to filter files, remove to list all,
         //remove this if your are grabbing folder list
       );
       setState(() {}); //update the UI
