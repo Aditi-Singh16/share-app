@@ -1,15 +1,41 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_app/screens/home/get-files.dart';
 import 'package:share_app/screens/home/get-music.dart';
 import 'package:share_app/screens/home/get-photos.dart';
 import 'package:share_app/screens/home/get-videos.dart';
+import 'package:share_app/services/auth-service.dart';
+import 'package:share_app/services/sharedPreferences.dart';
 
 import '../../make-responsive.dart';
 
-class TabBarDemo extends StatelessWidget {
-  const TabBarDemo({Key? key}) : super(key: key);
+
+class TabBarDemo extends StatefulWidget {
+  final id ;
+  TabBarDemo(this.id);
 
   @override
+  _TabBarDemoState createState() => _TabBarDemoState();
+}
+
+class _TabBarDemoState extends State<TabBarDemo> {
+  String userName = '';
+
+  AuthService _authService = new AuthService();
+
+  Future getName()async{
+    String name = await HelperFunctions().readUserNamePref();
+    setState(() {
+      userName= name;
+    });
+  }
+  @override
+  void initState(){
+    print('user id is ${widget.id}');
+    getName();
+    super.initState();
+  }
+
   Widget build(BuildContext context) {
     SizeConfig().init(context);
     return MaterialApp(
@@ -26,7 +52,7 @@ class TabBarDemo extends StatelessWidget {
                 Tab(icon: Icon(Icons.music_note)),
               ],
             ),
-            title: const Text('Tabs Demo'),
+            title: Text('$userName'),
           ),
           body: Column(
             children: [
@@ -40,7 +66,7 @@ class TabBarDemo extends StatelessWidget {
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child: GetVideos(),
-                    ),                    
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(16.0),
                       child:  GetFiles(),
