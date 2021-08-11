@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
+import 'package:share_app/models/user.dart';
+import 'package:share_app/screens/home/tab-bar.dart';
 import 'package:share_app/services/auth-service.dart';
+import 'package:share_app/services/dataBase_Helper.dart';
+import 'package:share_app/services/sharedPreferences.dart';
 import '../../make-responsive.dart';
 
 class GetStarted extends StatelessWidget {
 
   final TextEditingController _textEditingController = new TextEditingController();
   AuthService _authService = AuthService();
+  final dbHelper = DataBaseHelper.instance;
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +54,17 @@ class GetStarted extends StatelessWidget {
                       ),
               onPressed: ()async{
                 dynamic result = await _authService.singInAnon(_textEditingController.text);
-                print('after login $result');
+                dynamic storedUser = await dbHelper.insertUser(result!);
+                if(result == null){
+                  print('result was null');
+                }else{
+                  HelperFunctions().setUserIdPref(result.id);
+                  HelperFunctions().setUserNamePref(result.userName);
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => TabBarDemo(result.id)),
+                  );
+                }
               },
               splashColor: Colors.redAccent,
             )

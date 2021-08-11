@@ -1,21 +1,41 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_app/screens/authenticate/get-started.dart';
+import 'package:share_app/screens/home/tab-bar.dart';
+import 'package:share_app/services/sharedPreferences.dart';
 
 class SplashScreen extends StatefulWidget {
-  const SplashScreen({Key? key}) : super(key: key);
+  
+  final isLoggedIn ;
+  SplashScreen(this.isLoggedIn);
 
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
 
 class _SplashScreenState extends State<SplashScreen> {
-  
+  String userName='';
+  String id='';
+
+  Future getAllInfo()async{
+    String name = await HelperFunctions().readUserNamePref();
+    String uid = await HelperFunctions().readUserIdPref();
+    setState(() {
+      userName= name;
+      id = uid;
+    });
+  }
+
   @override
   void initState(){
+    getAllInfo();
     Future.delayed(Duration(seconds:5),(){
+      widget.isLoggedIn?
       Navigator.pushReplacement(context, MaterialPageRoute(
-          builder: (context)=>GetStarted()));
+          builder: (context)=>TabBarDemo(id)))
+      :
+      Navigator.pushReplacement(context, MaterialPageRoute(
+          builder: (context)=>GetStarted()));  
     });
     super.initState();
   }
