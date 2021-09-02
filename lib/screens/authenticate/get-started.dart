@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import 'package:share_app/models/user.dart';
 import 'package:share_app/screens/home/tab-bar.dart';
 import 'package:share_app/services/auth-service.dart';
 import 'package:share_app/services/dataBase_Helper.dart';
@@ -55,6 +54,7 @@ class GetStarted extends StatelessWidget {
               onPressed: ()async{
                 dynamic result = await _authService.singInAnon(_textEditingController.text);
                 dynamic storedUser = await dbHelper.insertUser(result!);
+                print(result);
                 if(result == null){
                   print('result was null');
                 }else{
