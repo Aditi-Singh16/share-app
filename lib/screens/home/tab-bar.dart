@@ -78,47 +78,100 @@ class _TabBarDemoState extends State<TabBarDemo> {
                   ],
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(20.0),
-                child: Row(
-                mainAxisAlignment: MainAxisAlignment.center ,//Center Row contents horizontally,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: [
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/sendButton.jpg',
-                      height: SizeConfig.blockSizeVertical!*15,
-                      width: SizeConfig.blockSizeHorizontal!*30,
+              Container(
+                height: SizeConfig.blockSizeVertical!*20,
+                child: Stack(
+                  children: [
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*2,
+                        left: SizeConfig.blockSizeHorizontal!*10,
+                        child:ElevatedButton(
+                          child: Icon(
+                              Icons.folder_open,
+                            color: Color(0xff023E8A),
+                            size: 50,
+                          ),
+                          onPressed: (){
+                            print('pressed');
+                          },
+                            style: ElevatedButton.styleFrom(
+                            shape: new RoundedRectangleBorder(
+                            borderRadius: new BorderRadius.circular(50.0)
+                            ),
+                            padding: EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
+                            primary: Color(0xff64DFDF),
+                            elevation: 10.0,
+                            )
+                        )
                     ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0.1,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(0.0),
-                      primary: Color(0xff64DFDF), // <-- Button color
-                      onPrimary: Colors.red, // <-- Splash color
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*1,
+                        left: SizeConfig.blockSizeHorizontal!*20,
+                        child:Icon(
+                            Icons.arrow_upward,
+                          color: Color(0xff023E8A),
+                          size: 50,
+                        )
                     ),
-                  ),
-                  SizedBox(width: SizeConfig.blockSizeHorizontal!*10.0),
-                  ElevatedButton(
-                    onPressed: () {},
-                    child: Image.asset(
-                      'assets/receiveButton.jpg',
-                      height: SizeConfig.blockSizeVertical!*15,
-                      width: SizeConfig.blockSizeHorizontal!*30,
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*11,
+                        left: SizeConfig.blockSizeHorizontal!*16,
+                        child:Text(
+                          'Send',
+                          style: TextStyle(
+                              color: Color(0xff5E60CE),
+                              fontSize: 30,
+                              fontFamily: 'Rancho'
+                          ),
+                        )
                     ),
-                    style: ElevatedButton.styleFrom(
-                      elevation: 0.1,
-                      shape: CircleBorder(),
-                      padding: EdgeInsets.all(0.0),
-                      primary: Color(0xff64DFDF), // <-- Button color
-                      onPrimary: Colors.red, // <-- Splash color
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*2,
+                        right: SizeConfig.blockSizeHorizontal!*10,
+                        child:ElevatedButton(
+                            child: Icon(
+                              Icons.folder_open,
+                              color: Color(0xff023E8A),
+                              size: 50,
+                            ),
+                            onPressed: (){
+                              print('pressed');
+                            },
+                            style: ElevatedButton.styleFrom(
+                              shape: new RoundedRectangleBorder(
+                                  borderRadius: new BorderRadius.circular(50.0)
+                              ),
+                              padding: EdgeInsets.fromLTRB(25.0, 25.0, 25.0, 25.0),
+                              primary: Color(0xff64DFDF),
+                              elevation: 10.0,
+                            )
+                        )
                     ),
-                  )
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*1,
+                        right: SizeConfig.blockSizeHorizontal!*14,
+                        child:Icon(
+                          Icons.arrow_downward,
+                          color: Color(0xff023E8A),
+                          size: 50,
+                        )
+                    ),
+                    Positioned(
+                        top: SizeConfig.blockSizeVertical!*11,
+                        right: SizeConfig.blockSizeHorizontal!*13,
+                        child:Text(
+                          'Receive',
+                          style: TextStyle(
+                              color: Color(0xff5E60CE),
+                              fontSize: 30,
+                              fontFamily: 'Rancho'
+                          ),
+                        )
+                    )
+
                   ],
                 ),
               )
-
             ]
           ),
         ),
@@ -127,3 +180,37 @@ class _TabBarDemoState extends State<TabBarDemo> {
   }
 }
 
+// ElevatedButton(
+//   onPressed: () {},
+//   child: Image.asset(
+//     'assets/sendButton.jpg',
+//     height: SizeConfig.blockSizeVertical!*15,
+//     width: SizeConfig.blockSizeHorizontal!*30,
+//   ),
+//   style: ElevatedButton.styleFrom(
+//     elevation: 0.1,
+//     shape: CircleBorder(),
+//     padding: EdgeInsets.all(0.0),
+//     primary: Color(0xff64DFDF), // <-- Button color
+//     onPrimary: Colors.red, // <-- Splash color
+//   ),
+// ),
+// ElevatedButton(
+// child:Column(
+// children: [
+// Icon(Icons.arrow_upward),
+// Icon(Icons.folder_open)
+// ]
+// ),
+// onPressed: (){
+// print('pressed');
+// },
+// style: ElevatedButton.styleFrom(
+// shape: new RoundedRectangleBorder(
+// borderRadius: new BorderRadius.circular(50.0)
+// ),
+// padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
+// primary: Color(0xff64DFDF),
+// elevation: 10.0,
+// ),
+// ),
