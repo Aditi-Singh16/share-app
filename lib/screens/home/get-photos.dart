@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
@@ -16,6 +17,7 @@ class GetPhotos extends StatefulWidget {
 class _GetPhotosState extends State<GetPhotos> {
 
   List<Widget> _mediaList = [];
+  List<String> filepath = [];
   int currentPage = 0;
   int? lastPage;
   AsciiCodec ac=new AsciiCodec();
@@ -41,6 +43,9 @@ class _GetPhotosState extends State<GetPhotos> {
       List<AssetEntity> media = await albums[0].getAssetListPaged(currentPage, 60);
       List<Widget> temp = [];
       for (var asset in media) {
+        asset.file.then((value) => {
+          filepath.add(value!.path)
+        });
         temp.add(
           FutureBuilder<Uint8List?>(
             future: asset.thumbData,
@@ -97,16 +102,17 @@ class _GetPhotosState extends State<GetPhotos> {
                 Align(
                   alignment: Alignment.topRight,
                   child: StatefulBuilder(
-                    builder: (BuildContext context, StateSetter setState) {
-                      return Checkbox(
-                            value: isChecked,
-                            shape: CircleBorder(),
-                            onChanged: (value) {
+                      builder: (BuildContext context, StateSetter setState) {
+                        return Checkbox(
+                          value: isChecked,
+                          shape: CircleBorder(),
+                          onChanged: (value) {
+                            print(filepath[index]);
                             setState(() {
-                            isChecked = value!;
-                          });
-                        },
-                      );
+                              isChecked = value!;
+                            });
+                          },
+                        );
                       }),
                 ),
               ],
