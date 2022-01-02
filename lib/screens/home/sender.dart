@@ -5,7 +5,6 @@ import 'package:flutter_styled_toast/flutter_styled_toast.dart';
 import 'package:flutter/material.dart';
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter_nearby_connections/flutter_nearby_connections.dart';
-import 'package:file_picker/file_picker.dart';
 
 
 class SenderScreen extends StatefulWidget {
@@ -27,41 +26,19 @@ class _SenderScreenState extends State<SenderScreen> {
   bool isInit = false;
 
 
-  Widget _showFiles(BuildContext context){
-    return
-      showFileList?
-      Column(
-        children: [
-          Expanded(
-          child: SizedBox(
-            height: 180.00,
-            child: ListView.builder(
-            itemCount: selectedFiles.length,
-            itemBuilder: (context, index) {
-              return ListTile(
-                title: Text('${selectedFiles[index].path}'),
-              );
-            },
-            ),
-          ),
-        ),
-          ElevatedButton(
-              onPressed: (){
-                sendFilesTouser();
-              },
-              child: Text('Send files')
-          )
-        ]
-      )
-
-            :Container();
-  }
 
   @override
   void initState() {
     super.initState();
     init();
   }
+
+   Widget ShowFiles(BuildContext context){
+     return connectedDevices.length>0?
+         Container(child: Text("connected"),)
+             :
+     Container(child: Text("disconnected"),);
+   }
 
   @override
   void dispose() {
@@ -112,7 +89,9 @@ class _SenderScreenState extends State<SenderScreen> {
                               )),
                           // Request connect
                           GestureDetector(
-                            onTap: () => _onButtonClicked(device),
+                            onTap: (){
+                              _onButtonClicked(device);
+                            },
                             child: Container(
                               margin: EdgeInsets.symmetric(horizontal: 8.0),
                               padding: EdgeInsets.all(8.0),
@@ -128,15 +107,6 @@ class _SenderScreenState extends State<SenderScreen> {
                                 ),
                               ),
                             ),
-                          ),
-                          ElevatedButton(
-                              onPressed: (){
-                                selectMultipleFiles(device);
-                                setState(() {
-                                  showFileList=true;
-                                });
-                              },
-                              child: Text('select files')
                           )
                         ],
                       ),
@@ -152,7 +122,7 @@ class _SenderScreenState extends State<SenderScreen> {
                 );
               }
               ),
-            _showFiles(context)
+            ShowFiles(context)
          ]
         ),
 
@@ -180,22 +150,7 @@ class _SenderScreenState extends State<SenderScreen> {
     }
   }
 
-  Future<void> selectMultipleFiles(Device device)async{
-    print('device is $device');
-    FilePickerResult? result = await FilePicker.platform.pickFiles(allowMultiple: true);
 
-    if(result != null) {
-      List<File> files = result.paths.map((path) => File(path!)).toList();
-      print('files are: $files');
-      setState(() {
-        selectedFiles = files;
-      });
-      print(files[0].path);
-
-    } else {
-      return;
-    }
-  }
 
   Color getStateColor(SessionState state) {
     switch (state) {
@@ -249,9 +204,6 @@ class _SenderScreenState extends State<SenderScreen> {
     }
   }
 
-  sendFilesTouser(){
-    
-  }
 
   int getItemCount() {
     if (widget.deviceType == 'receiver') {

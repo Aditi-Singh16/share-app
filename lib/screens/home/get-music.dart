@@ -1,7 +1,4 @@
 import 'package:flutter/material.dart';
-import 'dart:io';
-import 'package:flutter_file_manager/flutter_file_manager.dart';
-import 'package:path_provider_ex/path_provider_ex.dart';
 
 class GetMusic extends StatefulWidget {
   const GetMusic({ Key? key }) : super(key: key);
@@ -12,27 +9,6 @@ class GetMusic extends StatefulWidget {
 
 class _GetMusicState extends State<GetMusic> {
   var files;
- 
-  void getFiles() async { //asyn function to get list of files
-      List<StorageInfo> storageInfo = await PathProviderEx.getStorageInfo();
-      var root = storageInfo[0].rootDir; //storageInfo[1] for SD card, geting the root directory
-      var fm = FileManager(root: Directory(root)); //
-      files = await fm.filesTree( 
-      //set fm.dirsTree() for directory/folder tree list
-        excludedPaths: ["/storage/emulated/0/Android"],
-        extensions: ["mp3","wma","aac"] //optional, to filter files, remove to list all,
-        //remove this if your are grabbing folder list
-      );
-      setState(() {}); //update the UI
-  }
-
-  @override
-  void initState() {
-    getFiles(); //call getFiles() function on initial state. 
-    super.initState();
-  }
-
-  
 
   @override
   Widget build(BuildContext context) {

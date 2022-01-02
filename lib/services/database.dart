@@ -1,11 +1,22 @@
+import 'dart:io';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'package:share_app/services/sharedPreferences.dart';
 
 class DatabaseService{
 
-  final CollectionReference collectionReference = FirebaseFirestore.instance.collection('transfer');
-  final FirebaseFirestore _firebaseFirestore = FirebaseFirestore.instance;
+  FirebaseStorage storage = FirebaseStorage.instance;
 
-  addFile(String filename)async{
-    await collectionReference.add({'url':filename,'messageType':0});
+  Future<void> uploadPhotos(String path)async{
+    File file = File(path);
+    Reference ref = storage.ref().child(await HelperFunctions().readUserIdPref() +"-"+ DateTime.now().toString());
+    try {
+      await ref.putFile(file);
+    }  catch (e) {
+      print("error is "+e.toString());
+    }
   }
+
+
 }

@@ -4,6 +4,7 @@ import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 import 'package:photo_manager/photo_manager.dart';
+import 'package:share_app/services/sharedPreferences.dart';
 
 import '../../make-responsive.dart';
 
@@ -18,6 +19,7 @@ class _GetPhotosState extends State<GetPhotos> {
 
   List<Widget> _mediaList = [];
   List<String> filepath = [];
+  List<String> uploadList = [];
   int currentPage = 0;
   int? lastPage;
   AsciiCodec ac=new AsciiCodec();
@@ -107,10 +109,16 @@ class _GetPhotosState extends State<GetPhotos> {
                           value: isChecked,
                           shape: CircleBorder(),
                           onChanged: (value) {
-                            print(filepath[index]);
+                            if(value==false){
+                              uploadList.remove(filepath[index]);
+                            }else{
+                              uploadList.add(filepath[index]);
+                            }
+                            HelperFunctions().setUploadList(uploadList);
                             setState(() {
                               isChecked = value!;
                             });
+
                           },
                         );
                       }),
