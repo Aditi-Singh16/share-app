@@ -1,12 +1,12 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:share_app/screens/home/get-files.dart';
 import 'package:share_app/screens/home/get-music.dart';
 import 'package:share_app/screens/home/get-photos.dart';
 import 'package:share_app/screens/home/get-videos.dart';
-import 'package:share_app/services/auth-service.dart';
+import 'package:share_app/screens/home/receiver.dart';
+import 'package:share_app/screens/home/sender.dart';
+import 'package:share_app/services/database.dart';
 import 'package:share_app/services/sharedPreferences.dart';
-
 import '../../make-responsive.dart';
 
 
@@ -21,8 +21,7 @@ class TabBarDemo extends StatefulWidget {
 class _TabBarDemoState extends State<TabBarDemo> {
   String userName = '';
 
-  AuthService _authService = new AuthService();
-
+  DatabaseService _databaseService = new DatabaseService();
   Future getName()async{
     String name = await HelperFunctions().readUserNamePref();
     setState(() {
@@ -91,8 +90,15 @@ class _TabBarDemoState extends State<TabBarDemo> {
                             color: Color(0xff023E8A),
                             size: 50,
                           ),
-                          onPressed: (){
-                            print('pressed');
+                          onPressed: () {
+                            HelperFunctions().readUploadList().then((value) => {
+                              value.forEach((element)async {
+                                await _databaseService.uploadPhotos(element);
+                              })
+                            });
+                            Navigator.push(context,MaterialPageRoute(
+                              builder: (BuildContext context) => SenderScreen('sender'),
+                            ));
                           },
                             style: ElevatedButton.styleFrom(
                             shape: new RoundedRectangleBorder(
@@ -135,7 +141,10 @@ class _TabBarDemoState extends State<TabBarDemo> {
                               size: 50,
                             ),
                             onPressed: (){
-                              print('pressed');
+                              Navigator.push(context, MaterialPageRoute(
+                                builder: (BuildContext context) => ReceiverScreen('receiver'),
+                              )
+                              );
                             },
                             style: ElevatedButton.styleFrom(
                               shape: new RoundedRectangleBorder(
@@ -179,38 +188,3 @@ class _TabBarDemoState extends State<TabBarDemo> {
     );
   }
 }
-
-// ElevatedButton(
-//   onPressed: () {},
-//   child: Image.asset(
-//     'assets/sendButton.jpg',
-//     height: SizeConfig.blockSizeVertical!*15,
-//     width: SizeConfig.blockSizeHorizontal!*30,
-//   ),
-//   style: ElevatedButton.styleFrom(
-//     elevation: 0.1,
-//     shape: CircleBorder(),
-//     padding: EdgeInsets.all(0.0),
-//     primary: Color(0xff64DFDF), // <-- Button color
-//     onPrimary: Colors.red, // <-- Splash color
-//   ),
-// ),
-// ElevatedButton(
-// child:Column(
-// children: [
-// Icon(Icons.arrow_upward),
-// Icon(Icons.folder_open)
-// ]
-// ),
-// onPressed: (){
-// print('pressed');
-// },
-// style: ElevatedButton.styleFrom(
-// shape: new RoundedRectangleBorder(
-// borderRadius: new BorderRadius.circular(50.0)
-// ),
-// padding: EdgeInsets.fromLTRB(25.0, 10.0, 25.0, 10.0),
-// primary: Color(0xff64DFDF),
-// elevation: 10.0,
-// ),
-// ),
