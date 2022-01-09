@@ -34,6 +34,7 @@ class DataBaseHelper {
       CREATE TABLE IF NOT EXISTS users(
       id VARCHAR(100) PRIMARY KEY,
       user_name TEXT NOT NULL,
+      deviceId VARCHAR(100) NOT NULL,
       profilePic VARCHAR(60)
       )
       '''

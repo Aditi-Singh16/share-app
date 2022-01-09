@@ -4,6 +4,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class HelperFunctions{
 
   final idKey = 'this_user_id';
+  final devIdKey = 'this_device_id';
   final userNameKey = 'this_user_fName';
   final uploadListKey = 'this_upload_list';
 
@@ -25,6 +26,11 @@ class HelperFunctions{
     prefs.setString(userNameKey, userName!);
   }
 
+  Future<void> setDeviceIdPref(String? devId) async {
+    final prefs = await SharedPreferences.getInstance();
+    prefs.setString(devIdKey, devId!);
+  }
+
   Future<void> setUploadList(List<String> uploadList) async {
     final prefs = await SharedPreferences.getInstance();
     prefs.setStringList(uploadListKey, uploadList);
@@ -43,6 +49,11 @@ class HelperFunctions{
   Future<String> readUserNamePref() async {
     final prefs = await SharedPreferences.getInstance();
     return prefs.getString('this_user_fName') ?? '';
+  }
+
+  Future<String> readDeviceIdPref() async {
+    final prefs = await SharedPreferences.getInstance();
+    return prefs.getString('this_device_id') ?? '';
   }
 
 }
