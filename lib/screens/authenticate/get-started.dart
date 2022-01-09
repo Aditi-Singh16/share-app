@@ -1,3 +1,4 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import 'package:share_app/screens/home/tab-bar.dart';
@@ -52,13 +53,15 @@ class GetStarted extends StatelessWidget {
                           ),
                       ),
               onPressed: ()async{
-                dynamic result = await _authService.singInAnon(_textEditingController.text);
+                DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+                AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+                dynamic result = await _authService.singInAnon(_textEditingController.text,androidInfo.androidId);
                 dynamic storedUser = await dbHelper.insertUser(result!);
-                print(result);
                 if(result == null){
                   print('result was null');
                 }else{
                   HelperFunctions().setUserIdPref(result.id);
+                  HelperFunctions().setDeviceIdPref(androidInfo.androidId);
                   HelperFunctions().setUserNamePref(result.userName);
                   Navigator.push(
                     context,

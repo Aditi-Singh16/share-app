@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:share_app/models/user.dart';
-import 'package:share_app/screens/authenticate/authentication.dart';
 import 'package:share_app/screens/authenticate/get-started.dart';
-import 'package:share_app/screens/authenticate/splash-screen.dart';
-import 'package:share_app/screens/home/home.dart';
 import 'package:share_app/screens/home/tab-bar.dart';
 
 class Wrapper extends StatelessWidget {

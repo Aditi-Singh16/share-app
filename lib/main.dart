@@ -1,12 +1,9 @@
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:provider/provider.dart';
 import 'package:share_app/models/user.dart';
 import 'package:share_app/screens/authenticate/splash-screen.dart';
-import 'package:share_app/services/auth-service.dart';
 import 'package:share_app/services/dataBase_Helper.dart';
-import 'package:share_app/wrapper.dart';
+
 
 
 void main() async{
@@ -47,13 +44,3 @@ class _MyAppState extends State<MyApp> {
     );
   }
 }
-
-
-
-
-
-
-
-
-
-

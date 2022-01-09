@@ -21,18 +21,19 @@ class AuthService{
     return MyUser(
       id: user.data()!['id'],
       userName: user.data()!['user_name'],
-      profilePic: user.data()!['profile_pic']
+      profilePic: user.data()!['profile_pic'],
+      deviceId: user.data()!['deviceId']
     );
 
   }
 
 
   //sign in anonymously
-  Future<MyUser?> singInAnon(String displayName)async{
+  Future<MyUser?> singInAnon(String displayName,String? deviceId)async{
     try{
       UserCredential userCredential = await _auth.signInAnonymously();
       User? user = userCredential.user;
-      MyUser row = MyUser(userName:displayName, id: user!.uid);
+      MyUser row = MyUser(userName:displayName, id: user!.uid,deviceId:deviceId);
       await FirebaseFirestore.instance.collection('users').doc(user.uid).set(row.toMap());
       return _userFromFirebase(user.uid);
     }catch(e){
